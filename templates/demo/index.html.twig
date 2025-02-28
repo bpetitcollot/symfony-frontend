@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Main page{% endblock %}
+
+
+{% block body %}
+
+    <h1>Demo page</h1>
+    <h2>Some Javascript components with Assets Mapper</h2>
+
+    <h3>React components</h3>
+
+    <div id="root"></div>
+    <div id="root-jsx"></div>
+
+{% endblock %}
+
+{% block javascripts %}{{ parent() }}
+    {% block importmap %}{{ importmap('hello') }}{% endblock %}
+    <script type="module">
+      import React from 'react';
+      import {createRoot} from 'react-dom/client';
+      import {Hello, HelloJSX} from 'hello';
+
+      createRoot(document.getElementById('root')).render(React.createElement(Hello, {name: "you"}));
+
+      createRoot(document.getElementById('root-jsx')).render(React.createElement(HelloJSX, {name: "you"}));
+
+    </script>
+{% endblock %}
